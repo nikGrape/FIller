@@ -6,13 +6,13 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 22:09:34 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/08 00:01:12 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/08/08 14:34:17 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	tmp_print(t_map *map, t_piece *piece)
+void	tmp_print(t_map *map)
 {
 	int		i;
 	char	*str;
@@ -20,10 +20,10 @@ void	tmp_print(t_map *map, t_piece *piece)
 	i = 0;
 	while (map->map[i])
 		ft_printf("%s\n", map->map[i++]);
-	ft_printf("\nplayer - %c\nx - %d, y - %d\n", map->player, map->x, map->y);
+	ft_printf("\nplayer - %c\nx - %d, y - %d\n", map->player, map->map_x, map->map_y);
 	i = 0;
 	ft_printf("\n\n");
-	while (piece->piece[i])
-		ft_printf("%s\n", piece->piece[i++]);
-	ft_printf("x - %d, y - %d\n", piece->x, piece->y);
+	while (map->token[i])
+		ft_printf("%s\n", map->token[i++]);
+	ft_printf("x - %d, y - %d\n", map->token_x, map->token_y);
 }

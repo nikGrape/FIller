@@ -6,39 +6,36 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 23:17:45 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/07 23:57:51 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/08/08 13:48:40 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-static void		get_xy(int fd, t_piece *piece)
+static void		get_token_xy(t_map *map)
 {
 	char *str;
 
-	get_next_line(fd, &str);
-	piece->y = ft_atoi(ft_strchr(str, ' '));
-	piece->x = ft_atoi(ft_strrchr(str, ' '));
+	get_next_line(map->fd, &str);
+	map->token_y = ft_atoi(ft_strchr(str, ' '));
+	map->token_x = ft_atoi(ft_strrchr(str, ' '));
 	ft_strdel(&str);
 }
 
-t_piece		*piece_reader(int fd)
+void			piece_reader(t_map *map)
 {
-	t_piece		*piece;
 	char		*str;
 	int			i;
 
-	piece = (t_piece *)malloc(sizeof(t_piece));
-	get_xy(fd, piece);
-	piece->piece = (char **)malloc(sizeof(char *) * (piece->y + 1));
+	get_token_xy(map);
+	map->token = (char **)malloc(sizeof(char *) * (map->token_y + 1));
 	i = 0;
-	while (i < piece->y)
+	while (i < map->token_y)
 	{
-		piece->piece[i] = ft_strnew(piece->x);
-		get_next_line(fd, &str);
-		ft_strcpy(piece->piece[i++], str);
+		map->token[i] = ft_strnew(map->token_x);
+		get_next_line(map->fd, &str);
+		ft_strcpy(map->token[i++], str);
 		ft_strdel(&str);
 	}
-	piece->piece[i] = NULL;
-	return (piece);
+	map->token[i] = NULL;
 }

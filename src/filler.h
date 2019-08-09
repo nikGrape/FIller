@@ -6,7 +6,7 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:00:40 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/08 00:00:43 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/08/08 14:35:41 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,18 @@ typedef struct
 {
 	int		fd;
 	char	player;
-	int		x;
-	int		y;
 	char	**map;
+	int		map_x;
+	int		map_y;
+	char	**token;
+	int		token_x;
+	int		token_y;
 }			t_map;
 
-typedef struct
-{
-	int		x;
-	int		y;
-	char	**piece;
-}			t_piece;
-
-t_map		*map_reader(int fd);
-t_piece		*piece_reader(int fd);
-void	tmp_print(t_map *map, t_piece *piece);
+t_map		*get_player_and_size(int fd);
+void		map_reader(t_map *map);
+void		piece_reader(t_map *map);
+void		tmp_print(t_map *map);
+void		filler(int fd, t_map *map);
 
 #endif
