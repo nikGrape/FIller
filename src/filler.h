@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filler.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:00:40 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/08 14:35:41 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:10:43 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct
 {
 	int		fd;
 	char	player;
-	char	**map;
+	int		**map;
 	int		map_x;
 	int		map_y;
 	char	**token;
@@ -27,10 +27,14 @@ typedef struct
 	int		token_y;
 }			t_map;
 
-t_map		*get_player_and_size(int fd);
+t_map		*init_map(int fd);
+char		*find_line(int fd, char *key);
 void		map_reader(t_map *map);
 void		piece_reader(t_map *map);
+void		filler(t_map *map);
+void		heat_map(t_map *map);
+void		put_token(t_map *map);
+void		del_token(t_map *map);
 void		tmp_print(t_map *map);
-void		filler(int fd, t_map *map);
 
 #endif

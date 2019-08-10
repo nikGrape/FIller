@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   map_reader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:25:41 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/08 15:32:27 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:53:59 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-char		*find_line(int fd, char *key)
+static void		put_players_on_board(t_map *map, int line, char *str)
 {
-	char *str;
+	int i;
 
-	while (1)
+	i = 0;
+	while (str[i])
 	{
-		get_next_line(fd, &str);
-		if (ft_strstr(str, key))
-			break ;
-		ft_strdel(&str);
+		if (str[i] != '.')
+			map->map[line][i] = (str[i] == map->player) ? -5 : 0;
+		else
+			map->map[line][i] = -1;
+		i++;
 	}
-	return (str);
 }
 
 void		map_reader(t_map *map)
 {
 	char	*str;
-	char	*p;
 	int		i;
 
 	i = 0;
 	str = find_line(map->fd, "000");
-	while (i < map->map_y - 1)
-	{
-		ft_strcpy(map->map[i++], ft_strchr(str, ' ') + 1);
-		ft_strdel(&str);
-		get_next_line(map->fd, &str);
-	}
+	put_players_on_board(map, i++, ft_strchr(str, ' ') + 1);
 	ft_strdel(&str);
-	map->map[i] = NULL;
+	while (i < map->map_y)
+	{
+		get_next_line(map->fd, &str);
+		put_players_on_board(map, i++, ft_strchr(str, ' ') + 1);
+		ft_strdel(&str);
+	}
 }

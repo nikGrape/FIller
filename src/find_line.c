@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   find_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/07 22:09:34 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/09 18:24:56 by Nik              ###   ########.fr       */
+/*   Created: 2019/08/09 19:33:44 by Nik               #+#    #+#             */
+/*   Updated: 2019/08/09 19:56:51 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	tmp_print(t_map *map)
+char		*find_line(int fd, char *key)
 {
-	int i;
-	int j;
+	char *str;
 
-	i = 0;
-	while (i < map->map_y)
+	while (get_next_line(fd, &str) > 0)
 	{
-		j = 0;
-		while (j < map->map_x)
-			ft_printf("%2d ", map->map[i][j++]);
-		ft_printf("\n");
-		i++;
+		if (ft_strstr(str, key))
+			break ;
+		ft_strdel(&str);
 	}
-	i = 0;
-	ft_printf("\n\n");
-	while (map->token[i])
-		ft_printf("%s\n", map->token[i++]);
-	ft_printf("x - %d, y - %d\n", map->token_x, map->token_y);
+	return (str);
 }

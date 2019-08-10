@@ -3,67 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   put_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 15:59:41 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/08 17:22:44 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/08/09 20:46:25 by Nik              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void		fill_board_of_values(int **nbr_map)
+int		token_sum(t_map *map, int y, int x)
 {
+	int sum;
 	int i;
 	int j;
 
+	sum = 0;
 	i = 0;
-	while (1)
+	while (i < map->token_y)
 	{
 		j = 0;
-		while ()
+		while (j < map->token_x)
 		{
-			while (1)
-				;
-		}
-	}
-}
-
-void		put_players_on_board(t_map *map, int **nbr_board)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (map->map[i])
-	{
-		j = 0;
-		while (map->map[i][j])
-		{
-			if (map->map[i][j] != '.')
-				nbr_board[i][j] = (map->map[i][j] == map->player) ? -1 : 0;
-			else
-				nbr_board[i][j] = 142;
+			if (map->map[i + y][j + x] != -5 && map->token[i][j] == '*')
+				sum += map->map[i + y][j + x];
 			j++;
 		}
 		i++;
 	}
+	return (sum);
 }
 
-int		**init_board_of_value(t_map *map)
+int		colision_check(t_map *map, int y, int x)
 {
-	int		**nbr_board;
-	int		i;
+	int i;
+	int j;
+	int colisions;
 
+	colisions = 0;
 	i = 0;
-	nbr_board = (int **)malloc(sizeof(int *) * map->map_y);
-	while (i < map->map_y)
-		nbr_board[i++] = (int *)malloc(sizeof(int) * map->map_x);
-	fill_board_of_value(map, nbr_board);
-	return (nbr_board);
+	while (i < map->token_y)
+	{
+		j = 0;
+		while (j < map->token_x)
+		{
+			if (map->map[i + y][j + x] == -5 && map->token[i][j] == '*')
+				colisions++;
+			if (map->map[i + y][j + x] == 0 && map->token[i][j] == '*')
+				return (0);
+			j++;
+		}
+		if (colisions > 1)
+			return (0);
+		i++;
+	}
+	return (colisions);
 }
 
 void	put_token(t_map *map)
 {
-	
+	int y;
+	int x;
+	int res_x;
+	int res_y;
+	int sum;
+	int min;
+
+	y = 0;
+	min = 900;
+	while (y + map->token_y <= map->map_y)
+	{
+		x = 0;
+		while (x + map->token_x <= map->map_x)
+		{
+			if (colision_check(map, y, x) == 1)
+			{
+				sum = token_sum(map, y, x);
+				if (sum <= min)
+				{
+					min = sum;
+					res_x = x;
+					res_y = y;
+				}
+			}
+			x++;
+		}
+		y++;
+	}
+	ft_printf("%d %d\n", res_y, res_x);
 }
