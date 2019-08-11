@@ -3,44 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   heat_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:13:55 by Nik               #+#    #+#             */
-/*   Updated: 2019/08/09 18:45:33 by Nik              ###   ########.fr       */
+/*   Updated: 2019/08/10 12:22:18 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-# define MAX(A, B) ((A) > (B) ? (A) : (B))
+#define MAX(A, B) ((A) > (B) ? (A) : (B))
 
 void	dot_encircle(t_map *map, int y, int x)
 {
-	int value = map->map[y][x] + 1;
-	
+	int value;
+
+	value = map->map[y][x] + 1;
 	if (y > 0)
 	{
-		if (map->map[y - 1][x] == -1)
+		if (map->map[y - 1][x] == DOT)
 			map->map[y - 1][x] = value;
-		if (map->map[y - 1][x + 1] == -1 && x < map->map_x - 1)
+		if (map->map[y - 1][x + 1] == DOT && x < map->map_x - 1)
 			map->map[y - 1][x + 1] = value;
-		if (map->map[y - 1][x - 1] == -1 && x > 0)
+		if (map->map[y - 1][x - 1] == DOT && x > 0)
 			map->map[y - 1][x - 1] = value;
 	}
-	if (map->map[y][x + 1] == -1 && x < map->map_x - 1)
+	if (map->map[y][x + 1] == DOT && x < map->map_x - 1)
 		map->map[y][x + 1] = value;
-	if (map->map[y][x - 1] == -1 && x != 0)
+	if (map->map[y][x - 1] == DOT && x != 0)
 		map->map[y][x - 1] = value;
 	if (y < map->map_y - 1)
 	{
-		if (map->map[y + 1][x] == -1)
+		if (map->map[y + 1][x] == DOT)
 			map->map[y + 1][x] = value;
-		if (map->map[y + 1][x + 1] == -1 && x < map->map_x - 1)
+		if (map->map[y + 1][x + 1] == DOT && x < map->map_x - 1)
 			map->map[y + 1][x + 1] = value;
-		if (map->map[y + 1][x - 1] == -1 && x > 0)
+		if (map->map[y + 1][x - 1] == DOT && x > 0)
 			map->map[y + 1][x - 1] = value;
 	}
 }
-
 
 void	heat_map(t_map *map)
 {

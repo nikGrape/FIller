@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   piece_reader.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 23:17:45 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/09 20:05:04 by Nik              ###   ########.fr       */
+/*   Updated: 2019/08/10 12:32:28 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ void			piece_reader(t_map *map)
 	i = 0;
 	while (i < map->token_y)
 	{
-		map->token[i] = ft_strnew(map->token_x);
 		get_next_line(map->fd, &str);
-		ft_strcpy(map->token[i++], str);
-		ft_strdel(&str);
+		map->token[i++] = str;
 	}
 	map->token[i] = NULL;
 }

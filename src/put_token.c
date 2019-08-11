@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_token.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 15:59:41 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/09 20:46:25 by Nik              ###   ########.fr       */
+/*   Updated: 2019/08/10 17:58:06 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		token_sum(t_map *map, int y, int x)
 		j = 0;
 		while (j < map->token_x)
 		{
-			if (map->map[i + y][j + x] != -5 && map->token[i][j] == '*')
+			if (map->token[i][j] == '*' && map->map[i + y][j + x] != ME)
 				sum += map->map[i + y][j + x];
 			j++;
 		}
@@ -47,9 +47,9 @@ int		colision_check(t_map *map, int y, int x)
 		j = 0;
 		while (j < map->token_x)
 		{
-			if (map->map[i + y][j + x] == -5 && map->token[i][j] == '*')
+			if (map->map[i + y][j + x] == ME && map->token[i][j] == '*')
 				colisions++;
-			if (map->map[i + y][j + x] == 0 && map->token[i][j] == '*')
+			if (map->map[i + y][j + x] == ENEMY && map->token[i][j] == '*')
 				return (0);
 			j++;
 		}
@@ -64,8 +64,6 @@ void	put_token(t_map *map)
 {
 	int y;
 	int x;
-	int res_x;
-	int res_y;
 	int sum;
 	int min;
 
@@ -79,16 +77,25 @@ void	put_token(t_map *map)
 			if (colision_check(map, y, x) == 1)
 			{
 				sum = token_sum(map, y, x);
-				if (sum <= min)
+				if (map->player == 'O')
+				{
+					if (sum <= min)
+					{
+						min = sum;
+						map->res_x = x;
+						map->res_y = y;
+					}
+				}
+				else if (sum < min)
 				{
 					min = sum;
-					res_x = x;
-					res_y = y;
+					map->res_x = x;
+					map->res_y = y;
 				}
 			}
 			x++;
 		}
 		y++;
 	}
-	ft_printf("%d %d\n", res_y, res_x);
+	ft_printf("%d %d\n", map->res_y, map->res_x);
 }

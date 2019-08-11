@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+         #
+#    By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/09 20:50:50 by Nik               #+#    #+#              #
-#    Updated: 2019/08/09 20:53:02 by Nik              ###   ########.fr        #
+#    Updated: 2019/08/10 14:55:03 by vinograd         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS=src/*.c
 
 INCLUDES=libft/libft.a
 
-FLAGS=-Werror -Wextra -Wall
+#FLAGS=-Werror -Wextra -Wall
 
 all: $(NAME)
 

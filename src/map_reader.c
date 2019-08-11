@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_reader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 20:25:41 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/09 20:53:59 by Nik              ###   ########.fr       */
+/*   Updated: 2019/08/10 17:34:35 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@ static void		put_players_on_board(t_map *map, int line, char *str)
 	while (str[i])
 	{
 		if (str[i] != '.')
-			map->map[line][i] = (str[i] == map->player) ? -5 : 0;
+			map->map[line][i] =\
+			(str[i] == map->player || str[i] == map->player + 32) ? ME : ENEMY;
 		else
-			map->map[line][i] = -1;
+			map->map[line][i] = DOT;
 		i++;
 	}
 }
 
-void		map_reader(t_map *map)
+void			map_reader(t_map *map)
 {
 	char	*str;
 	int		i;

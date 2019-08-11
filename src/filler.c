@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   filler.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Nik <Nik@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 19:39:45 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/09 20:56:42 by Nik              ###   ########.fr       */
+/*   Updated: 2019/08/10 17:59:07 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Need to improve algorithm 
-** if I am O I have to get last little sum (or if I above anemy)
-** if I am X I have to get first little sum
-** 
-** and fix del token
+**Need to improve algorithm
+**if I am O I have to get last little sum (or if I above anemy)
+**if I am X I have to get first little sum
  */
+
 #include "filler.h"
 
 int		main(void)
@@ -32,6 +31,7 @@ int		main(void)
 		filler(map);
 	//close(fd);
 	//tmp_print(map);
+	del_map(map);
 }
 
 void	filler(t_map *map)
@@ -40,5 +40,5 @@ void	filler(t_map *map)
 	piece_reader(map);
 	heat_map(map);
 	put_token(map);
-	//del_token(map);
+	del_token(map);
 }
