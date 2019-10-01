@@ -6,7 +6,7 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 19:39:45 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/10 17:59:07 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/10/01 14:21:56 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int		main(void)
 	int		fd;
 	char	*str;
 
-	//fd = open("maps/filler2.txt", O_RDONLY);
-	fd = 0;
+	fd = open("maps/filler2.txt", O_RDONLY);
+	// fd = 0;
 	map = init_map(fd);
 	while (get_next_line(map->fd, &str) > 0)
 		filler(map);
-	//close(fd);
-	//tmp_print(map);
+	close(fd);
+	tmp_print(map);
 	del_map(map);
 }
 

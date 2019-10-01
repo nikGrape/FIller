@@ -6,7 +6,7 @@
 /*   By: vinograd <vinograd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 15:59:41 by vinograd          #+#    #+#             */
-/*   Updated: 2019/08/10 17:58:06 by vinograd         ###   ########.fr       */
+/*   Updated: 2019/10/01 14:54:14 by vinograd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,7 @@ void	put_token(t_map *map)
 			if (colision_check(map, y, x) == 1)
 			{
 				sum = token_sum(map, y, x);
-				if (map->player == 'O')
-				{
-					if (sum <= min)
-					{
-						min = sum;
-						map->res_x = x;
-						map->res_y = y;
-					}
-				}
-				else if (sum < min)
+				if (sum < min)
 				{
 					min = sum;
 					map->res_x = x;
