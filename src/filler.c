@@ -24,8 +24,8 @@ int		main(void)
 	int		fd;
 	char	*str;
 
-	fd = open("maps/filler2.txt", O_RDONLY);
-	// fd = 0;
+	// fd = open("maps/filler2.txt", O_RDONLY);
+	fd = 0;
 	map = init_map(fd);
 	while (get_next_line(map->fd, &str) > 0)
 		filler(map);

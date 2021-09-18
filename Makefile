@@ -16,11 +16,9 @@ SRCS=src/*.c
 
 INCLUDES=libft/libft.a
 
-#FLAGS=-Werror -Wextra -Wall
+FLAGS=-Werror -Wextra -Wall
 
-all: $(NAME)
-
-$(NAME):
+all: 
 	@make -C libft/ all
 	gcc -o $(NAME) $(FLAGS) $(SRCS) $(INCLUDES)
 
